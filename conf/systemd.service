@@ -1,0 +1,16 @@
+[Unit]
+Description=pia
+After=network.target
+
+[Service]
+WorkingDirectory=$final_path
+User=pia
+Group=users
+Type=simple
+UMask=000
+ExecStart=/usr/bin/java #ng build --prod#
+RestartSec=30
+"Restart=always
+
+[Install]
+WantedBy=multi-user.target

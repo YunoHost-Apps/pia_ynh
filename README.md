@@ -1,5 +1,5 @@
 # PIA app for YunoHost
-PIA Server
+PIA Front End Server
 
 # NOT WORK IS IN DEV
 

@@ -8,9 +8,9 @@ User=pia
 Group=users
 Type=simple
 UMask=000
-ExecStart=/usr/bin/ng build --prod $final_path
+ExecStart=/usr/bin/ng serve --port 4200 --host 0.0.0.0
 RestartSec=30
-"Restart=always
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

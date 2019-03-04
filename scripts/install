@@ -107,6 +107,13 @@ npm install -g @angular/cli
 ng build --prod --build-optimizer --sourcemaps
 
 #=================================================
+# SETUP SYSTEMD
+#=================================================
+
+ynh_add_systemd_config
+systemctl enable $app.service
+
+#=================================================
 # NGINX CONFIGURATION
 #=================================================
 
@@ -164,4 +171,5 @@ if [ $is_public -eq 1 ]; then
 fi
 
 # Reload services
+systemctl start $app.service
 systemctl reload nginx

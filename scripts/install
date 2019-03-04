@@ -99,21 +99,22 @@ curl -sL https://deb.nodesource.com/setup_10.x | bash -
 ## Install nodejs
 apt install -y nodejs
 
-#==============================================
-# INSTALL PIA
-#==============================================
-mv $final_path/src/environments/environment.prod.ts.example $final_path/src/environments/environment.prod.ts
-#npm install -g @angular/cli
-ng update @angular/cli --migrate-only --from=1.7.4
-#ng update --all
-ng build --prod --build-optimizer --sourcemaps
-
 #=================================================
 # SETUP SYSTEMD
 #=================================================
 
 ynh_add_systemd_config
 systemctl enable $app.service
+
+#==============================================
+# INSTALL PIA
+#==============================================
+mv $final_path/src/environments/environment.prod.ts.example $final_path/src/environments/environment.prod.ts
+npm install -g  @angular/cli@latest
+cd $final_path
+ng update @angular/cli --migrate-only --from=1.7.4
+#ng update --all
+ng build --prod --build-optimizer --sourcemaps
 
 #=================================================
 # NGINX CONFIGURATION

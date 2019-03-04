@@ -8,7 +8,7 @@ User=pia
 Group=users
 Type=simple
 UMask=000
-ExecStart=/usr/bin/java #ng build --prod#
+ExecStart=/usr/bin/ng build --prod $final_path
 RestartSec=30
 "Restart=always
 

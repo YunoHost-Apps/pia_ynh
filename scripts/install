@@ -92,8 +92,9 @@ ynh_setup_source "$final_path"
 #==============================================
 # INSTALL PIA
 #==============================================
-
-dpkg --install  $final_path/emby-server-deb*
+mv $final_path/src/environments/environment.prod.ts.example $final_path/src/environments/environment.prod.ts
+npm install -g @angular/cli
+ng build --prod --build-optimizer --sourcemaps
 
 #=================================================
 # NGINX CONFIGURATION

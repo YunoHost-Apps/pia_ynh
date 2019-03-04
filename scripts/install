@@ -112,13 +112,13 @@ systemctl enable $app.service
 #==============================================
 # INSTALL PIA
 #==============================================
-mv $final_path/src/environments/environment.prod.ts.example $final_path/src/environments/environment.prod.ts
-cd $final_path/
-#npm install -g  @angular/cli@latest
+#mv $final_path/src/environments/environment.prod.ts.example $final_path/src/environments/environment.prod.ts
+cd $final_path
+npm install
 npm install -g @angular/cli@1.7.4
 #ng update @angular/cli --migrate-only --from=1.7.4
 #ng update --all
-ng build --prod
+#ng build --prod
 
 #=================================================
 # NGINX CONFIGURATION

@@ -103,7 +103,9 @@ apt install -y nodejs
 # INSTALL PIA
 #==============================================
 mv $final_path/src/environments/environment.prod.ts.example $final_path/src/environments/environment.prod.ts
-npm install -g @angular/cli
+#npm install -g @angular/cli
+ng update @angular/cli --migrate-only --from=1.7.4
+#ng update --all
 ng build --prod --build-optimizer --sourcemaps
 
 #=================================================

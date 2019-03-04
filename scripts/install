@@ -95,9 +95,12 @@ ynh_setup_source "$final_path"
 
 ## Install nodejs repo
 curl -sL https://deb.nodesource.com/setup_10.x | bash -
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
 ## Install nodejs
-apt install -y nodejs
+sudo apt update
+apt install -y nodejs npm yarn
 
 #=================================================
 # SETUP SYSTEMD
@@ -110,9 +113,9 @@ systemctl enable $app.service
 # INSTALL PIA
 #==============================================
 mv $final_path/src/environments/environment.prod.ts.example $final_path/src/environments/environment.prod.ts
-#npm install -g  @angular/cli@latest
-npm install -g @angular/cli@1.5
 cd $final_path/
+#npm install -g  @angular/cli@latest
+npm install -g @angular/cli@1.7.4
 #ng update @angular/cli --migrate-only --from=1.7.4
 #ng update --all
 ng build --prod

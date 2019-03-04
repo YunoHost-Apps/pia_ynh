@@ -102,13 +102,6 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.lis
 sudo apt update
 apt install -y nodejs npm yarn
 
-#=================================================
-# SETUP SYSTEMD
-#=================================================
-
-ynh_add_systemd_config
-systemctl enable $app.service
-
 #==============================================
 # INSTALL PIA
 #==============================================
@@ -120,6 +113,13 @@ npm install -g @angular/cli@1.7.4
 #ng update --all
 #ng build --prod
 popd
+
+#=================================================
+# SETUP SYSTEMD
+#=================================================
+
+ynh_add_systemd_config
+systemctl enable $app.service
 
 #=================================================
 # NGINX CONFIGURATION

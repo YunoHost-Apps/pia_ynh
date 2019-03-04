@@ -76,10 +76,10 @@ ynh_app_setting_set $app is_public $is_public
 ###		- Remove the section "CLOSE A PORT" in the remove script
 
 # Find a free port
-#port=$(ynh_find_port 80)
+port=$(ynh_find_port 4200)
 # Open this port
-#yunohost firewall allow --no-upnp TCP $port 2>&1
-#ynh_app_setting_set $app port $port
+yunohost firewall allow --no-upnp TCP $port 2>&1
+ynh_app_setting_set $app port $port
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

@@ -3,14 +3,14 @@ Description=pia
 After=network.target
 
 [Service]
-WorkingDirectory=$final_path
+WorkingDirectory=/opt/pia
 User=pia
 Group=users
 Type=simple
 UMask=000
 ExecStart=/usr/bin/ng serve --port 4200 --host 0.0.0.0
-RestartSec=30
-Restart=always
+Restart=on-failure
+StartLimitInterval=600
 
 [Install]
 WantedBy=multi-user.target

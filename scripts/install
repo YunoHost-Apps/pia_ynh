@@ -118,30 +118,32 @@ ynh_psql_test_if_first_run
 ynh_psql_create_db $db_name $db_name $db_pwd
 
 #=================================================
-# SPECIFIC SETUP
-#=================================================
-
-mkdir -p /opt/pia-back
-cp -a ../conf/database.example.yml /opt/pia-back/database.yml
-
-#=================================================
-# MODIFY A CONFIG FILE
-#=================================================
-
-ynh_replace_string "yunouser"   "$db_name"    "/opt/pia-back/database.yml"
-ynh_replace_string "yunopass"   "$db_pwd"     "/opt/pia-back/database.yml"
-ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/database.yml"
-
-#=================================================
 # INSTALL PIA BACK
 #=================================================
 ynh_print_info "Installing PIA Back End..."
 
+mkdir -p /opt/pia-back
 pushd /opt/pia-back/
 curl -L https://github.com/LINCnil/pia-back/archive/2.0.1.tar.gz | tar --strip-components=1 -xzv
 bundle install
 RAILS_ENV=production bin/rake db:create && RAILS_ENV=production bin/rake db:migrate
 popd
+
+#=================================================
+# SPECIFIC SETUP
+#=================================================
+
+cp -a ../conf/database.example.yml /opt/pia-back/config/database.yml
+cp -a ../conf/application.example.yml /opt/pia-back/config/application.yml
+
+#=================================================
+# MODIFY A CONFIG FILE
+#=================================================
+
+ynh_replace_string "yunouser"   "$db_name"    "/opt/pia-back/config/database.yml"
+ynh_replace_string "yunopass"   "$db_pwd"     "/opt/pia-back/config/database.yml"
+ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/config/database.yml"
+ynh_replace_string "yunokey"    "$key"    "/opt/pia-back/config/application.yml"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

@@ -98,8 +98,8 @@ ynh_install_app_dependencies postgresql
 
 ynh_print_info "Installing Ruby..."
 
-#curl -sSL https://rvm.io/mpapis.asc | gpg --import -
-#curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+curl -sSL https://rvm.io/mpapis.asc | sudo gpg --import -
+curl -sSL https://rvm.io/pkuczynski.asc | sudo gpg --import -
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 
 #=================================================

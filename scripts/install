@@ -76,10 +76,10 @@ ynh_app_setting_set $app is_public $is_public
 ###		- Remove the section "CLOSE A PORT" in the remove script
 
 # Find a free port
-#port=$(ynh_find_port 4200)
+port=$(ynh_find_port 3000)
 # Open this port
-#yunohost firewall allow --no-upnp TCP $port 2>&1
-#ynh_app_setting_set $app port $port
+yunohost firewall allow --no-upnp TCP $port 2>&1
+ynh_app_setting_set $app port $port
 
 
 #=================================================
@@ -120,16 +120,27 @@ ynh_psql_create_db $db_name $db_name $db_pwd
 #=================================================
 # SPECIFIC SETUP
 #=================================================
-
-cp -a ../conf/database.example.yml $final_path/database.yml
+mkdir -p /opt/pia-back
+cp -a ../conf/database.example.yml /opt/pia-back/database.yml
 
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
 
-ynh_replace_string "yunouser"   "$db_name"    "$final_path/database.yml"
-ynh_replace_string "yunopass"   "$db_pwd"     "$final_path/database.yml"
-ynh_replace_string "yunobase"   "$db_name"    "$final_path/database.yml"
+ynh_replace_string "yunouser"   "$db_name"    "/opt/pia-back/database.yml"
+ynh_replace_string "yunopass"   "$db_pwd"     "/opt/pia-back/database.yml"
+ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/database.yml"
+
+#=================================================
+# INSTALL PIA BACK
+#=================================================
+
+
+pushd /opt/pia-back/
+curl -L https://github.com/LINCnil/pia-back/archive/2.0.1.tar.gz | tar --strip-components=1 -xzv
+bundle install
+RAILS_ENV=production bin/rake db:create && RAILS_ENV=production bin/rake db:migrate
+popd
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -184,7 +195,6 @@ ynh_system_user_create $app
 
 # Set permissions to app files
 chown -R $app:$app $final_path
-
 
 #=================================================
 # SETUP SSOWAT

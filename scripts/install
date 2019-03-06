@@ -143,7 +143,7 @@ cp -a ../conf/application.example.yml /opt/pia-back/config/application.yml
 ynh_replace_string "yunouser"   "$db_name"    "/opt/pia-back/config/database.yml"
 ynh_replace_string "yunopass"   "$db_pwd"     "/opt/pia-back/config/database.yml"
 ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/config/database.yml"
-ynh_replace_string "yunokey"    "$key"    "/opt/pia-back/config/application.yml"
+ynh_replace_string "yunokey"    "$key"        "/opt/pia-back/config/application.yml"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

@@ -94,7 +94,7 @@ ynh_print_info "Installing dependencies..."
 ###		- As well as the section "REINSTALL DEPENDENCIES" in the restore script
 ###		- And the section "UPGRADE DEPENDENCIES" in the upgrade script
 
-ynh_install_app_dependencies postgresql ruby-dev
+ynh_install_app_dependencies postgresql ruby-dev zlib1g-dev
 
 #ynh_print_info "Installing Ruby rvm..."
 

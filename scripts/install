@@ -133,7 +133,7 @@ ynh_print_info "Installing PIA Back End..."
 mkdir -p /opt/pia-back
 pushd /opt/pia-back/
 curl -L https://github.com/LINCnil/pia-back/archive/2.0.1.tar.gz | tar --strip-components=1 -xzv
-sudo -u $app bundle install
+sudo -u admin bundle install
 # need to capture the key !
 bin/rake secret
 RAILS_ENV=production bin/rake db:create && RAILS_ENV=production bin/rake db:migrate

@@ -94,22 +94,23 @@ ynh_print_info "Installing dependencies..."
 ###		- As well as the section "REINSTALL DEPENDENCIES" in the restore script
 ###		- And the section "UPGRADE DEPENDENCIES" in the upgrade script
 
-ynh_install_app_dependencies postgresql
+ynh_install_app_dependencies postgresql ruby
 
-ynh_print_info "Installing Ruby..."
+#ynh_print_info "Installing Ruby rvm..."
 
 #curl -sSL https://rvm.io/mpapis.asc | sudo gpg --import -
 #curl -sSL https://rvm.io/pkuczynski.asc | sudo gpg --import -
 #gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 #curl -sSL https://get.rvm.io | bash -s stable --ruby
 
-sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-curl -sSL https://get.rvm.io | bash -s stable
-source ~/.rvm/scripts/rvm
-rvm install 2.5.3
-rvm use 2.5.3 --default
-ruby -v
+#ynh_print_info "Installing Ruby rvm..."
+#sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
+#gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+#curl -sSL https://get.rvm.io | bash -s stable
+#source ~/.rvm/scripts/rvm
+#rvm install 2.5.3
+#rvm use 2.5.3 --default
+#ruby -v
 
 ynh_print_info "Installing Rails..."
 

@@ -100,8 +100,29 @@ ynh_print_info "Installing Ruby..."
 
 #curl -sSL https://rvm.io/mpapis.asc | sudo gpg --import -
 #curl -sSL https://rvm.io/pkuczynski.asc | sudo gpg --import -
-gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-curl -sSL https://get.rvm.io | bash -s stable --ruby
+#gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+#curl -sSL https://get.rvm.io | bash -s stable --ruby
+
+cd
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+exec $SHELL
+
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+exec $SHELL
+
+rbenv install 2.5.3
+rbenv global 2.5.3
+ruby -v
+
+ynh_print_info "Installing Ruby..."
+
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+gem install rails -v 5.0.7.1
 
 #=================================================
 # CREATE A POSTGRESQL DATABASE
@@ -141,7 +162,6 @@ mkdir -p /opt/pia-back
 pushd /opt/pia-back/
 curl -L https://github.com/LINCnil/pia-back/archive/2.0.1.tar.gz | tar --strip-components=1 -xzv
 gem install bundler:2.0.1
-cp -a ../conf/Gemfile /opt/pia-back/Gemfile
 sudo -u admin bundle install
 # need to capture the key !
 bin/rake secret

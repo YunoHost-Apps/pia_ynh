@@ -101,7 +101,6 @@ ynh_print_info "Installing Ruby..."
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
 curl -sSL https://get.rvm.io | bash -s stable --ruby
-gem install bundler:2.0.1
 
 #=================================================
 # CREATE A POSTGRESQL DATABASE
@@ -140,6 +139,8 @@ ynh_print_info "Installing PIA Back End..."
 mkdir -p /opt/pia-back
 pushd /opt/pia-back/
 curl -L https://github.com/LINCnil/pia-back/archive/2.0.1.tar.gz | tar --strip-components=1 -xzv
+gem install bundler:2.0.1
+cp -a ../conf/Gemfile /opt/pia-back/Gemfile
 sudo -u admin bundle install
 # need to capture the key !
 bin/rake secret

@@ -69,7 +69,6 @@ ynh_app_setting_set $app is_public $is_public
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
-
 ynh_print_info "Open port..."
 
 ### Use these lines if you have to open a port for the application

@@ -160,7 +160,8 @@ curl -L https://github.com/LINCnil/pia-back/archive/2.0.1.tar.gz | tar --strip-c
 gem install bundler:2.0.1
 #cp -a ../conf/Gemfile.example /opt/pia-back/Gemfile
 ynh_replace_string "2.5.3" "2.3.3" "/opt/pia-back/Gemfile"
-sudo -u admin bundle install
+bundle install
+#sudo -u admin bundle install
 # need to capture the key !
 bin/rake secret
 RAILS_ENV=production bin/rake db:create && RAILS_ENV=production bin/rake db:migrate

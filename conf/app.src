@@ -1,5 +1,5 @@
-SOURCE_URL=https://github.com/kosmas58/pia/archive/2.0.0.5.tar.gz
-SOURCE_SUM=2645f3513d548bd1ee406788af803cf300ebab782e4b597509eb2f42743cd76e3461d4ed2028a9b97f29007d5ac7763b8ca5d498ee5f967718ce0fde3f1f3df3
+SOURCE_URL=https://github.com/YunoHost-Apps/pia_ynh/releases/download/2.0.0/pia.tar.gz
+SOURCE_SUM=a8516715e68949ccafd274610d600a4e903fe7e152c74f0511dae3f612334ef0679dfb64539b64a7db18b66c07bca6dc4035f9b6a8a28f05a6cd47f2406261bb
 SOURCE_SUM_PRG=sha512sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true

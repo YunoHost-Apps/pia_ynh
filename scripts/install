@@ -81,6 +81,42 @@ ynh_app_setting_set $app is_public $is_public
 #yunohost firewall allow --no-upnp TCP $port 2>&1
 #ynh_app_setting_set $app port $port
 
+
+#=================================================
+# INSTALL DEPENDENCIES
+#=================================================
+ynh_print_info "Installing dependencies..."
+
+### `ynh_install_app_dependencies` allows you to add any "apt" dependencies to the package.
+### Those deb packages will be installed as dependencies of this package.
+### If you're not using this helper:
+###		- Remove the section "REMOVE DEPENDENCIES" in the remove script
+###		- As well as the section "REINSTALL DEPENDENCIES" in the restore script
+###		- And the section "UPGRADE DEPENDENCIES" in the upgrade script
+
+ynh_install_app_dependencies postgresql rails
+
+#=================================================
+# CREATE A POSTGRESQL DATABASE
+#=================================================
+ynh_print_info "Creating a PostgreSQL database..."
+
+### Use these lines if you need a database for the application.
+### `ynh_mysql_setup_db` will create a database, an associated user and a ramdom password.
+### The password will be stored as 'mysqlpwd' into the app settings,
+### and will be available as $db_pwd
+### If you're not using these lines:
+###		- Remove the section "BACKUP THE POSTGRESQL DATABASE" in the backup script
+###		- Remove also the section "REMOVE THE POSTGRESQL DATABASE" in the remove script
+###		- As well as the section "RESTORE THE POSTGRESQL DATABASE" in the restore script
+
+db_name=$(ynh_sanitize_dbid $app)
+db_pwd="pia"
+ynh_app_setting_set $app db_name $db_name
+ynh_app_setting_set $app db_pwd $db_pwd
+ynh_psql_test_if_first_run
+ynh_psql_create_db $db_name $db_name $db_pwd
+
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================

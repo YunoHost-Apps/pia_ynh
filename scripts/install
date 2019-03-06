@@ -118,6 +118,20 @@ ynh_psql_test_if_first_run
 ynh_psql_create_db $db_name $db_name $db_pwd
 
 #=================================================
+# SPECIFIC SETUP
+#=================================================
+
+cp -a ../conf/database.example.yml $final_path/database.yml
+
+#=================================================
+# MODIFY A CONFIG FILE
+#=================================================
+
+ynh_replace_string "yunouser"   "$db_name"    "$final_path/database.yml"
+ynh_replace_string "yunopass"   "$db_pwd"     "$final_path/database.yml"
+ynh_replace_string "yunobase"   "$db_name"    "$final_path/database.yml"
+
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 

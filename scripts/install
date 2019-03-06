@@ -94,7 +94,7 @@ ynh_print_info "Installing dependencies..."
 ###		- As well as the section "REINSTALL DEPENDENCIES" in the restore script
 ###		- And the section "UPGRADE DEPENDENCIES" in the upgrade script
 
-ynh_install_app_dependencies postgresql ruby
+ynh_install_app_dependencies postgresql ruby-dev
 
 #ynh_print_info "Installing Ruby rvm..."
 
@@ -114,8 +114,8 @@ ynh_install_app_dependencies postgresql ruby
 
 ynh_print_info "Installing Rails..."
 
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-sudo apt-get install -y nodejs
+#curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+#sudo apt-get install -y nodejs
 
 gem install rails -v 5.0.7.1
 rbenv rehash

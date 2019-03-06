@@ -118,6 +118,14 @@ ynh_psql_test_if_first_run
 ynh_psql_create_db $db_name $db_name $db_pwd
 
 #=================================================
+# CREATE DEDICATED USER
+#=================================================
+ynh_print_info "Create dedicated user..."
+
+# Create a system user
+ynh_system_user_create $app
+
+#=================================================
 # INSTALL PIA BACK
 #=================================================
 ynh_print_info "Installing PIA Back End..."
@@ -125,7 +133,7 @@ ynh_print_info "Installing PIA Back End..."
 mkdir -p /opt/pia-back
 pushd /opt/pia-back/
 curl -L https://github.com/LINCnil/pia-back/archive/2.0.1.tar.gz | tar --strip-components=1 -xzv
-bundle install
+sudo -u $app bundle install
 # need to capture the key !
 bin/rake secret
 RAILS_ENV=production bin/rake db:create && RAILS_ENV=production bin/rake db:migrate
@@ -162,13 +170,6 @@ ynh_setup_source "$final_path"
 
 # Create a dedicated nginx config
 ynh_add_nginx_config
-
-#=================================================
-# CREATE DEDICATED USER
-#=================================================
-
-# Create a system user
-ynh_system_user_create $app
 
 #=================================================
 # MODIFY A CONFIG FILE

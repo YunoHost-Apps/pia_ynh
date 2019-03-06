@@ -38,7 +38,7 @@ ynh_psql_remove_db $db_name $db_name
 #=================================================
 
 # Remove metapackage and its dependencies
-ynh_remove_app_dependencies
+#ynh_remove_app_dependencies
 
 #=================================================
 # REMOVE APP MAIN DIR

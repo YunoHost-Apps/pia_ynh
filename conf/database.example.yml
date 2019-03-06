@@ -22,8 +22,8 @@ production:
   adapter:  postgresql
   host:     localhost
   encoding: unicode
-  database: pia_production
+  database: yunobase
   pool:     5
-  username:
-  password:
+  username: yunouser
+  password: yunopass
   template: template0

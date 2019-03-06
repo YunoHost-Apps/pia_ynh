@@ -26,6 +26,14 @@ final_path=$(ynh_app_setting_get $app final_path)
 #ynh_package_remove emby-server
 
 #=================================================
+# REMOVE THE POSTGRESQL DATABASE
+#=================================================
+ynh_print_info "Removing the PostgreSQL database"
+
+# Remove a database if it exists, along with the associated user
+ynh_psql_remove_db $db_name $db_name
+
+#=================================================
 # REMOVE DEPENDENCIES
 #=================================================
 

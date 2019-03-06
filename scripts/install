@@ -126,6 +126,7 @@ mkdir -p /opt/pia-back
 pushd /opt/pia-back/
 curl -L https://github.com/LINCnil/pia-back/archive/2.0.1.tar.gz | tar --strip-components=1 -xzv
 bundle install
+bin/rake secret need to capture the key !
 RAILS_ENV=production bin/rake db:create && RAILS_ENV=production bin/rake db:migrate
 popd
 

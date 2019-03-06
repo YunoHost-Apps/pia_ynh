@@ -94,7 +94,13 @@ ynh_print_info "Installing dependencies..."
 ###		- As well as the section "REINSTALL DEPENDENCIES" in the restore script
 ###		- And the section "UPGRADE DEPENDENCIES" in the upgrade script
 
-ynh_install_app_dependencies postgresql rails
+ynh_install_app_dependencies postgresql
+
+ynh_print_info "Installing Ruby..."
+
+curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+curl -sSL https://get.rvm.io | bash -s stable --ruby
 
 #=================================================
 # CREATE A POSTGRESQL DATABASE

@@ -70,6 +70,8 @@ ynh_app_setting_set $app is_public $is_public
 # FIND AND OPEN A PORT
 #=================================================
 
+ynh_print_info "Open port..."
+
 ### Use these lines if you have to open a port for the application
 ### `ynh_find_port` will find the first available port starting from the given port.
 ### If you're not using these lines:
@@ -80,7 +82,6 @@ port=$(ynh_find_port 3000)
 # Open this port
 yunohost firewall allow --no-upnp TCP $port 2>&1
 ynh_app_setting_set $app port $port
-
 
 #=================================================
 # INSTALL DEPENDENCIES
@@ -120,6 +121,7 @@ ynh_psql_create_db $db_name $db_name $db_pwd
 #=================================================
 # SPECIFIC SETUP
 #=================================================
+
 mkdir -p /opt/pia-back
 cp -a ../conf/database.example.yml /opt/pia-back/database.yml
 
@@ -134,7 +136,7 @@ ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/database.yml"
 #=================================================
 # INSTALL PIA BACK
 #=================================================
-
+ynh_print_info "Installing PIA Back End..."
 
 pushd /opt/pia-back/
 curl -L https://github.com/LINCnil/pia-back/archive/2.0.1.tar.gz | tar --strip-components=1 -xzv
@@ -145,6 +147,7 @@ popd
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
+ynh_print_info "Installing PIA Front End..."
 
 ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
@@ -181,7 +184,6 @@ ynh_system_user_create $app
 
 # Calculate and store the config file checksum into the app settings
 #ynh_store_file_checksum "/etc/onlyoffice/documentserver/nginx/onlyoffice-documentserver.conf"
-
 
 #=================================================
 # GENERIC FINALIZATION

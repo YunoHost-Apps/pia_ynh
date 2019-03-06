@@ -1,5 +1,4 @@
 # PIA app for YunoHost
-PIA Front End Server
 
 - [Yunohost project](https://yunohost.org)
 - [PIA website](https://www.cnil.fr/fr/outil-pia-telechargez-et-installez-le-logiciel-de-la-cnil)

@@ -47,7 +47,7 @@ app=$YNH_APP_INSTANCE_NAME
 
 ### If the app uses nginx as web server (written in HTML/PHP in most cases), the final path should be "/var/www/$app".
 ### If the app provides an internal web server (or uses another application server such as uwsgi), the final path should be "/opt/yunohost/$app"
-final_path=/opt/$app
+final_path=/var/www/$app
 test ! -e "$final_path" || ynh_die "This path already contains a folder"
 
 # Normalize the url path syntax
@@ -76,10 +76,10 @@ ynh_app_setting_set $app is_public $is_public
 ###		- Remove the section "CLOSE A PORT" in the remove script
 
 # Find a free port
-port=$(ynh_find_port 4200)
+#port=$(ynh_find_port 4200)
 # Open this port
-yunohost firewall allow --no-upnp TCP $port 2>&1
-ynh_app_setting_set $app port $port
+#yunohost firewall allow --no-upnp TCP $port 2>&1
+#ynh_app_setting_set $app port $port
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -88,38 +88,6 @@ ynh_app_setting_set $app port $port
 ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source "$final_path"
-
-#==============================================
-# INSTALL NODEJS
-#==============================================
-
-## Install nodejs repo
-curl -sL https://deb.nodesource.com/setup_10.x | bash -
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
-## Install nodejs
-sudo apt update
-apt install -y nodejs npm yarn
-
-#==============================================
-# INSTALL PIA
-#==============================================
-#mv $final_path/src/environments/environment.prod.ts.example $final_path/src/environments/environment.prod.ts
-pushd $final_path
-npm install
-npm install -g @angular/cli@1.7.4
-#ng update @angular/cli --migrate-only --from=1.7.4
-#ng update --all
-#ng build --prod
-popd
-
-#=================================================
-# SETUP SYSTEMD
-#=================================================
-
-ynh_add_systemd_config
-systemctl enable $app.service
 
 #=================================================
 # NGINX CONFIGURATION
@@ -165,7 +133,7 @@ ynh_system_user_create $app
 ### that really need such authorization.
 
 # Set permissions to app files
-#chown -R root: /etc/loolwsd
+chown -R $app:$app $final_path
 
 
 #=================================================
@@ -179,5 +147,4 @@ if [ $is_public -eq 1 ]; then
 fi
 
 # Reload services
-systemctl start $app.service
 systemctl reload nginx

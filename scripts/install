@@ -156,7 +156,7 @@ ynh_print_info "Installing PIA Back End..."
 
 mkdir -p /opt/pia-back
 pushd /opt/pia-back/
-curl -L https://github.com/YunoHost-Apps/pia_ynh/releases/download/2.0.0/2.0.2.tar.gz | tar --strip-components=1 -xzv
+curl -L https://github.com/YunoHost-Apps/pia_ynh/releases/download/2.0.0/pia-back-2.0.2.tar.gz | tar --strip-components=1 -xzv
 popd
 
 #=================================================

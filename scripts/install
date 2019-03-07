@@ -144,7 +144,7 @@ popd
 #=================================================
 ynh_print_info "Install PIA Back End Conffiguration..."
 
-rm /opt/pia-back/config/database.yml
+#rm /opt/pia-back/config/database.yml
 cp -a ../conf/database.example.yml /opt/pia-back/config/database.yml
 #cp -a ../conf/application.example.yml /opt/pia-back/config/application.yml
 

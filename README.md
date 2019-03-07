@@ -1,7 +1,5 @@
 # PIA app for YunoHost
 
-# NOT WORK IS IN DEV
-
 - [Yunohost project](https://yunohost.org)
 - [PIA website](https://www.cnil.fr/fr/outil-pia-telechargez-et-installez-le-logiciel-de-la-cnil)
 

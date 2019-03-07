@@ -94,11 +94,11 @@ ynh_print_info "Installing dependencies..."
 ###		- As well as the section "REINSTALL DEPENDENCIES" in the restore script
 ###		- And the section "UPGRADE DEPENDENCIES" in the upgrade script
 
-ynh_install_app_dependencies postgresql ruby-dev zlib1g-dev libpq-dev
+ynh_install_app_dependencies postgresql ruby-dev zlib1g-dev libpq-dev sqlite3 build-essential
 
 ynh_print_info "Installing Rails & Bunlder..."
 
-gem install rails:5.2.2 bundler:2.0.1
+#gem install rails:5.2.2 bundler:2.0.1
 
 #=================================================
 # CREATE A POSTGRESQL DATABASE
@@ -159,8 +159,8 @@ ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/config/database.yml
 ynh_print_info "Compile PIA Back End..."
 
 pushd /opt/pia-back/
+gem install rails bundler
 bundle install
-gem install factory_girl_rails:4.0
 key=$(bin/rake secret)
 mv config/application.example.yml config/application.yml
 ynh_replace_string "__SECRET_KEY_HERE__" "$key" "/opt/pia-back/config/application.yml"

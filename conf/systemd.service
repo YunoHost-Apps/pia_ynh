@@ -1,16 +1,18 @@
 [Unit]
-Description=pia
-After=network.target
+Description=Pia Backend
+Requires=network.target
+Requires=postgresql.service
 
 [Service]
-WorkingDirectory=/opt/pia
-User=pia
-Group=users
 Type=simple
-UMask=000
-ExecStart=/usr/bin/ng serve --port 4200 --host 0.0.0.0 --disable-host-check
-Restart=on-failure
-StartLimitInterval=600
+User=pia
+Group=pia
+WorkingDirectory=/opt/pia-back
+Environment=RAILS_ENV=production
+ExecStart=/bin/bash -c "/opt/pia-back/bin/rails s -b 0.0.0.0 -p 3000"
+TimeoutSec=30
+RestartSec=15s
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

@@ -157,15 +157,17 @@ ynh_print_info "Installing PIA Back End..."
 mkdir -p /opt/pia-back
 pushd /opt/pia-back/
 curl -L https://github.com/LINCnil/pia-back/archive/2.0.1.tar.gz | tar --strip-components=1 -xzv
+popd
 
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
 ynh_print_info "Install PIA Back End Conffiguration..."
 
-ynh_replace_string "2.5.3"      "2.3.3"       "/opt/pia-back/Gemfile"
 cp -a ../conf/database.example.yml /opt/pia-back/config/database.yml
 cp -a ../conf/application.example.yml /opt/pia-back/config/application.yml
+
+ynh_replace_string "2.5.3"      "2.3.3"       "/opt/pia-back/Gemfile"
 ynh_replace_string "yunouser"   "$db_name"    "/opt/pia-back/config/database.yml"
 ynh_replace_string "yunopass"   "$db_pwd"     "/opt/pia-back/config/database.yml"
 ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/config/database.yml"
@@ -175,6 +177,7 @@ ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/config/database.yml
 #=================================================
 ynh_print_info "Compile PIA Back End..."
 
+pushd /opt/pia-back/
 bundle install
 local SECRET=`bin/rake secret`
 sed -e "s/__SECRET_KEY_HERE__/$SECRET/" config/application.example.yml > config/application.yml

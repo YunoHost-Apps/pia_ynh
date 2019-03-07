@@ -86,11 +86,6 @@ ynh_app_setting_set $app port $port
 # INSTALL DEPENDENCIES
 #=================================================
 
-ynh_print_info "Install the backports repo for debian"
-
-echo 'deb http://deb.debian.org/debian stretch-backports main' > \
-/etc/apt/sources.list.d/$app.list
-
 ynh_print_info "Installing dependencies..."
 
 ### `ynh_install_app_dependencies` allows you to add any "apt" dependencies to the package.
@@ -100,11 +95,11 @@ ynh_print_info "Installing dependencies..."
 ###		- As well as the section "REINSTALL DEPENDENCIES" in the restore script
 ###		- And the section "UPGRADE DEPENDENCIES" in the upgrade script
 
-ynh_install_app_dependencies postgresql ruby-dev zlib1g-dev libpq-dev sqlite3 build-essential
+ynh_install_app_dependencies postgresql ruby-dev zlib1g-dev libpq-dev #sqlite3 build-essential
 
 ynh_print_info "Installing Rails & Bunlder..."
 
-#gem install rails:5.2.2 bundler:2.0.1
+gem install rails:5.2.2 bundler:2.0.1
 
 #=================================================
 # CREATE A POSTGRESQL DATABASE
@@ -165,7 +160,6 @@ ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/config/database.yml
 ynh_print_info "Compile PIA Back End..."
 
 pushd /opt/pia-back/
-gem install rails bundler
 bundle install
 key=$(bin/rake secret)
 mv config/application.example.yml config/application.yml

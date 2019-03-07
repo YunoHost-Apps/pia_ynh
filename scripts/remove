@@ -39,7 +39,7 @@ ynh_psql_remove_db $db_name $db_name
 #=================================================
 
 # Remove metapackage and its dependencies
-ynh_remove_app_dependencies
+#ynh_remove_app_dependencies
 
 #=================================================
 # REMOVE APP MAIN DIR
@@ -47,7 +47,7 @@ ynh_remove_app_dependencies
 
 # Remove the app directory securely
 ynh_secure_remove "$final_path"
-ynh_secure_remove "/opt/pia-back"
+#ynh_secure_remove "/opt/pia-back"
 
 #=================================================
 # REMOVE NGINX CONFIGURATION

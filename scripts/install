@@ -160,6 +160,7 @@ ynh_print_info "Compile PIA Back End..."
 
 pushd /opt/pia-back/
 bundle install
+gem install factory_girl_rails:4.0
 key=$(bin/rake secret)
 mv config/application.example.yml config/application.yml
 ynh_replace_string "__SECRET_KEY_HERE__" "$key" "/opt/pia-back/config/application.yml"

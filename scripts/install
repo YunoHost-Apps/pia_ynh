@@ -85,6 +85,12 @@ ynh_app_setting_set $app port $port
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
+
+ynh_print_info "Install the backports repo for debian"
+
+echo 'deb http://deb.debian.org/debian stretch-backports main' > \
+/etc/apt/sources.list.d/$app.list
+
 ynh_print_info "Installing dependencies..."
 
 ### `ynh_install_app_dependencies` allows you to add any "apt" dependencies to the package.

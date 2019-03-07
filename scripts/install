@@ -196,6 +196,13 @@ ynh_app_setting_set $app final_path $final_path
 ynh_setup_source "$final_path"
 
 #=================================================
+# SETUP SYSTEMD
+#=================================================
+
+ynh_add_systemd_config
+systemctl enable $app.service
+
+#=================================================
 # NGINX CONFIGURATION
 #=================================================
 
@@ -244,4 +251,5 @@ if [ $is_public -eq 1 ]; then
 fi
 
 # Reload services
+systemctl start $app.service
 systemctl reload nginx

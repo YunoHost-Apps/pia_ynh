@@ -179,16 +179,11 @@ ynh_print_info "Compile PIA Back End..."
 
 pushd /opt/pia-back/
 bundle install
-local SECRET=`bin/rake secret`
-sed -e "s/__SECRET_KEY_HERE__/$SECRET/" config/application.example.yml > config/application.yml
+key=$(bin/rake secret)
+mv config/application.example.yml config/application.yml
+ynh_replace_string "__SECRET_KEY_HERE__" "$key" "/opt/pia-back/config/application.yml"
 RAILS_ENV=production bin/rake db:create && RAILS_ENV=production bin/rake db:migrate
 popd
-
-#=================================================
-# SPECIFIC SETUP
-#=================================================
-
-#ynh_replace_string "yunokey"    "$key"        "/opt/pia-back/config/application.yml"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

@@ -182,7 +182,8 @@ bundle install
 key=$(bin/rake secret)
 mv config/application.example.yml config/application.yml
 ynh_replace_string "__SECRET_KEY_HERE__" "$key" "/opt/pia-back/config/application.yml"
-RAILS_ENV=production bin/rake db:create && RAILS_ENV=production bin/rake db:migrate
+#RAILS_ENV=production bin/rake db:create
+RAILS_ENV=production bin/rake db:migrate
 popd
 
 #=================================================

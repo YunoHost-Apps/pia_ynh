@@ -5,8 +5,8 @@ Requires=postgresql.service
 
 [Service]
 Type=simple
-User=pia
-Group=pia
+User=root
+Group=users
 WorkingDirectory=/opt/pia-back
 Environment=RAILS_ENV=production
 ExecStart=/bin/bash -c "/opt/pia-back/bin/rails s -b 0.0.0.0 -p 3000"

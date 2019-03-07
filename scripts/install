@@ -96,29 +96,9 @@ ynh_print_info "Installing dependencies..."
 
 ynh_install_app_dependencies postgresql ruby-dev zlib1g-dev libpq-dev
 
-#ynh_print_info "Installing Ruby rvm..."
-
-#curl -sSL https://rvm.io/mpapis.asc | sudo gpg --import -
-#curl -sSL https://rvm.io/pkuczynski.asc | sudo gpg --import -
-#gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-#curl -sSL https://get.rvm.io | bash -s stable --ruby
-
-#ynh_print_info "Installing Ruby rvm..."
-#sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
-#gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-#curl -sSL https://get.rvm.io | bash -s stable
-#source ~/.rvm/scripts/rvm
-#rvm install 2.5.3
-#rvm use 2.5.3 --default
-#ruby -v
-
 ynh_print_info "Installing Rails & Bunlder..."
 
-#curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-#sudo apt-get install -y nodejs
-
-gem install rails:5.0.7.1 bundler:2.0.1
-#rbenv rehash
+gem install rails:5.0.7.1 bundler:2.0.1 pg
 
 #=================================================
 # CREATE A POSTGRESQL DATABASE
@@ -156,7 +136,7 @@ ynh_print_info "Installing PIA Back End..."
 
 mkdir -p /opt/pia-back
 pushd /opt/pia-back/
-curl -L https://github.com/YunoHost-Apps/pia_ynh/releases/download/2.0.0/pia-back-2.0.2.tar.gz | tar --strip-components=1 -xzv
+curl -L https://github.com/YunoHost-Apps/pia_ynh/releases/download/2.0.0/pia-back-master.tar.gz | tar --strip-components=1 -xzv
 popd
 
 #=================================================
@@ -167,10 +147,10 @@ ynh_print_info "Install PIA Back End Conffiguration..."
 #cp -a ../conf/database.example.yml /opt/pia-back/config/database.yml
 #cp -a ../conf/application.example.yml /opt/pia-back/config/application.yml
 
-#ynh_replace_string "2.5.3"      "2.3.3"       "/opt/pia-back/Gemfile"
-ynh_replace_string "yunouser"   "$db_name"    "/opt/pia-back/config/database.yml"
-ynh_replace_string "yunopass"   "$db_pwd"     "/opt/pia-back/config/database.yml"
-ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/config/database.yml"
+ynh_replace_string "2.5.3"      "2.3.3"       "/opt/pia-back/Gemfile"
+ynh_replace_string "pia-user"                     "$db_name"    "/opt/pia-back/config/database.yml"
+ynh_replace_string "PIA-BACK_DATABASE_PASSWORD"   "$db_pwd"     "/opt/pia-back/config/database.yml"
+ynh_replace_string "pia_production"               "$db_name"    "/opt/pia-back/config/database.yml"
 
 #=================================================
 # COMPILE PIA BACK

@@ -167,7 +167,7 @@ ynh_print_info "Install PIA Back End Conffiguration..."
 #cp -a ../conf/database.example.yml /opt/pia-back/config/database.yml
 #cp -a ../conf/application.example.yml /opt/pia-back/config/application.yml
 
-ynh_replace_string "2.5.3"      "2.3.3"       "/opt/pia-back/Gemfile"
+#ynh_replace_string "2.5.3"      "2.3.3"       "/opt/pia-back/Gemfile"
 ynh_replace_string "yunouser"   "$db_name"    "/opt/pia-back/config/database.yml"
 ynh_replace_string "yunopass"   "$db_pwd"     "/opt/pia-back/config/database.yml"
 ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/config/database.yml"

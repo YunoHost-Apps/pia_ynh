@@ -186,7 +186,7 @@ ynh_print_info "Installing PIA Front End..."
 
 ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source "$final_path"
+ynh_setup_source "$final_path" "front"
 
 #=================================================
 # SETUP SYSTEMD

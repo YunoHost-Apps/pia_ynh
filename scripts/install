@@ -241,7 +241,6 @@ chown -R $app:$app $final_path
 if [ $is_public -eq 1 ]; then
   # unprotected_uris allows SSO credentials to be passed anyway.
   ynh_app_setting_set "$app" unprotected_uris "/"
-  ynh_app_setting_set "pia-back" unprotected_uris "/"
 fi
 
 # Reload services

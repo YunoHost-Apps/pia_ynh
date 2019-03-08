@@ -69,7 +69,7 @@ ynh_app_setting_set $app is_public $is_public
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
-ynh_print_info "Open port..."
+#ynh_print_info "Open port..."
 
 ### Use these lines if you have to open a port for the application
 ### `ynh_find_port` will find the first available port starting from the given port.
@@ -98,9 +98,6 @@ ynh_print_info "Installing dependencies..."
 ynh_install_app_dependencies postgresql ruby-dev zlib1g-dev libpq-dev
 
 ynh_print_info "Installing Rails & Bunlder..."
-
-#sudo gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-#curl -sSL https://get.rvm.io | bash -s stable --ruby
 
 #gem install rails:5.0.6 bundler:2.0.1
 gem install rails bundler
@@ -151,10 +148,7 @@ ynh_print_info "Install PIA Back End Conffiguration..."
 
 #rm /opt/pia-back/config/database.yml
 cp -a ../conf/database.example.yml /opt/pia-back/config/database.yml
-#cp -a ../conf/application.example.yml /opt/pia-back/config/application.yml
 
-#rm /opt/pia-back/Gemfile.lock
-#ynh_replace_string "factory_girl_rails"       "factory_bot_rails"       "/opt/pia-back/Gemfile"
 ynh_replace_string "2.5.3"      "2.3.3"       "/opt/pia-back/Gemfile"
 ynh_replace_string "yunouser"   "$db_name"    "/opt/pia-back/config/database.yml"
 ynh_replace_string "yunopass"   "$db_pwd"     "/opt/pia-back/config/database.yml"

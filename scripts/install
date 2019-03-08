@@ -50,6 +50,9 @@ app=$YNH_APP_INSTANCE_NAME
 final_path=/var/www/$app
 test ! -e "$final_path" || ynh_die "This path already contains a folder"
 
+back_path=/opt/pia-back
+test ! -e "$back_path" || ynh_die "This path already contains a folder"
+
 # Normalize the url path syntax
 path_url=$(ynh_normalize_url_path $path_url)
 
@@ -136,10 +139,18 @@ ynh_system_user_create $app
 #=================================================
 ynh_print_info "Installing PIA Back End..."
 
-mkdir -p /opt/pia-back
-pushd /opt/pia-back/
-curl -L https://github.com/YunoHost-Apps/pia_ynh/releases/download/2.0.0/pia-back-community.tar.gz | tar --strip-components=1 -xzv &> /dev/null
-popd
+#mkdir -p /opt/pia-back
+#pushd /opt/pia-back/
+#curl -L https://github.com/YunoHost-Apps/pia_ynh/releases/download/2.0.0/pia-back-community.tar.gz | tar --strip-components=1 -xzv &> /dev/null
+#popd
+
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+
+ynh_app_setting_set $app final_path $final_path
+# Download, check integrity, uncompress and patch the source from app.src
+ynh_setup_source "$back_path" "back"
 
 #=================================================
 # MODIFY A CONFIG FILE

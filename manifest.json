@@ -1,6 +1,6 @@
 {
-    "name": "PIA",
-    "id": "pia",
+    "name": "PIA-FRONT",
+    "id": "pia-front",
     "packaging_format": 1,
     "description": {
         "en": "PIA package for YunoHost.",
@@ -37,11 +37,11 @@
                 "name": "path",
                 "type": "path",
                 "ask": {
-                    "en": "Choose a path for PIA /pia is accepted",
-                    "fr": "Choisissez un chemin pour PIA /pia est accepté"
+                    "en": "Choose a path for PIA / is accepted",
+                    "fr": "Choisissez un chemin pour PIA / est accepté"
                 },
-                "example": "/pia",
-                "default": "/pia"
+                "example": "/",
+                "default": "/"
             },
             
             {

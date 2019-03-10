@@ -47,11 +47,8 @@ app=$YNH_APP_INSTANCE_NAME
 
 ### If the app uses nginx as web server (written in HTML/PHP in most cases), the final path should be "/var/www/$app".
 ### If the app provides an internal web server (or uses another application server such as uwsgi), the final path should be "/opt/yunohost/$app"
-final_path=/var/www/$app
+final_path=/opt/$app
 test ! -e "$final_path" || ynh_die "This path already contains a folder"
-
-back_path=/opt/pia-back
-test ! -e "$back_path" || ynh_die "This path already contains a folder"
 
 # Normalize the url path syntax
 path_url=$(ynh_normalize_url_path $path_url)
@@ -150,7 +147,7 @@ ynh_print_info "Installing PIA Back End..."
 
 ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source "$back_path" "back"
+ynh_setup_source "$final_path" "back"
 
 #=================================================
 # MODIFY A CONFIG FILE
@@ -178,15 +175,6 @@ ynh_replace_string "__SECRET_KEY_HERE__" "$key" "/opt/pia-back/config/applicatio
 #RAILS_ENV=production bin/rake db:create
 RAILS_ENV=production bin/rake db:migrate
 popd
-
-#=================================================
-# DOWNLOAD, CHECK AND UNPACK SOURCE
-#=================================================
-ynh_print_info "Installing PIA Front End..."
-
-ynh_app_setting_set $app final_path $final_path
-# Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source "$final_path" "front"
 
 #=================================================
 # SETUP SYSTEMD

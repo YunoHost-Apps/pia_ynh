@@ -135,18 +135,9 @@ ynh_print_info "Create dedicated user..."
 ynh_system_user_create $app
 
 #=================================================
-# INSTALL PIA BACK
-#=================================================
-ynh_print_info "Installing PIA Back End..."
-
-#mkdir -p /opt/pia-back
-#pushd /opt/pia-back/
-#curl -L https://github.com/YunoHost-Apps/pia_ynh/releases/download/2.0.0/pia-back-community.tar.gz | tar --strip-components=1 -xzv &> /dev/null
-#popd
-
-#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
+ynh_print_info "Installing PIA Back End..."
 
 ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src

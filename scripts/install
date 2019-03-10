@@ -102,8 +102,8 @@ ynh_install_app_dependencies postgresql ruby-dev zlib1g-dev libpq-dev
 
 ynh_print_info "Installing Rails & Bunlder..."
 
-#gem install rails:5.0.6 bundler:2.0.1
-gem install rails bundler
+gem install rails:5.0.6 bundler:2.0.1
+#gem install rails bundler
 
 #=================================================
 # CREATE A POSTGRESQL DATABASE

@@ -12,9 +12,9 @@
 
  1. App can be installed by YunoHost **admin web-interface** or by **running following command**:
 
-         $ sudo yunohost app install https://github.com/YunoHost-Apps/pia_ynh
+         $ sudo yunohost app install https://github.com/YunoHost-Apps/pia_ynh/tree/back
 
  
 ### Upgrade this package:
 
-        $ sudo yunohost app upgrade pia -u https://github.com/YunoHost-Apps/pia_ynh
+        $ sudo yunohost app upgrade pia -u https://github.com/YunoHost-Apps/pia_ynh/tree/back

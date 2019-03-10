@@ -1,6 +1,6 @@
 {
-    "name": "PIA",
-    "id": "pia",
+    "name": "PIA-BACK",
+    "id": "pia-back",
     "packaging_format": 1,
     "description": {
         "en": "PIA package for YunoHost.",

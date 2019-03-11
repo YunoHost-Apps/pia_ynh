@@ -148,7 +148,7 @@ ynh_setup_source "$back_path" "back"
 #=================================================
 ynh_print_info "Install PIA Back End Conffiguration..."
 
-#rm /opt/pia-back/config/database.yml
+rm /opt/pia-back/config/database.example.yml
 cp -a ../conf/database.example.yml /opt/pia-back/config/database.yml
 
 ynh_replace_string "2.5.3"      "2.3.3"       "/opt/pia-back/Gemfile"

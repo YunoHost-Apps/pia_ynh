@@ -151,6 +151,7 @@ ynh_print_info "Install PIA Back End Conffiguration..."
 rm /opt/pia-back/config/database.example.yml
 cp -a ../conf/database.example.yml /opt/pia-back/config/database.yml
 
+ynh_replace_string "pia_parameters[:structure_data] = JSON.parse(pia_parameters[:structure_data]) if pia_parameters[:structure_data]" "#pia_parameters[:structure_data] = JSON.parse(pia_parameters[:structure_data]) if pia_parameters[:structure_data]" "/opt/pia-back/app/controllers/pias_controller.rb"
 ynh_replace_string "2.5.3"      "2.3.3"       "/opt/pia-back/Gemfile"
 ynh_replace_string "yunouser"   "$db_name"    "/opt/pia-back/config/database.yml"
 ynh_replace_string "yunopass"   "$db_pwd"     "/opt/pia-back/config/database.yml"

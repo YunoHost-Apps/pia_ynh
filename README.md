@@ -10,16 +10,16 @@
 
 ### Installing guide
 
- 1. App can be installed by YunoHost **admin web-interface** or by **running following command**:
+ App can be installed by YunoHost **admin web-interface** or by **running following command**:
 
          $ sudo yunohost app install https://github.com/YunoHost-Apps/pia_ynh
          
-        After install :
+         After install :
  
-        1. Login in pia front
-        2. Go to Settings
-        3. Put your back end url
-        4. Exemple Pia Front in mydomain.com/ & Pia Back is mydomain.com/pia-back
+         1. Login in pia front
+         2. Go to Settings
+         3. Put your back end url
+         4. Exemple Pia Front in mydomain.com/ & Pia Back is mydomain.com/pia-back
 
  
 ### Upgrade this package:

@@ -1,4 +1,5 @@
 # PIA app for YunoHost
+PIA Server
 
 **Shipped version:** 2.0.0
 

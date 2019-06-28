@@ -1,5 +1,5 @@
-SOURCE_URL=https://github.com/YunoHost-Apps/pia_ynh/releases/download/2.0.0/pia-back-community.tar.gz
-SOURCE_SUM=e5210d1c3171b67f5bbc7919f2725c94c25c78464e7baba88541d70c5102bd7ed36dfac4f8d51d97e8132a58955044d63533ee094255d1088aef425acccb43b8
+SOURCE_URL=https://github.com/LINCnil/pia-back/archive/2.1.0.tar.gz
+SOURCE_SUM=5c509623f29ee1e0fa529dd1b813bf318b42b9f6fe0b56e062c28c112289e6ae5e67ab29c42846d45323fce7ff9177d8573ed39840b0ab97cc4d52dd01031458
 SOURCE_SUM_PRG=sha512sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true

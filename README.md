@@ -1,7 +1,7 @@
 # PIA app for YunoHost
 PIA Server
 
-**Shipped version:** 2.0.0
+**Shipped version:** 2.1.0
 
 - [Yunohost project](https://yunohost.org)
 - [PIA website](https://www.cnil.fr/fr/outil-pia-telechargez-et-installez-le-logiciel-de-la-cnil)

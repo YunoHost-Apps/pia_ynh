@@ -3,8 +3,8 @@
     "id": "pia",
     "packaging_format": 1,
     "description": {
-        "en": "PIA package for YunoHost.",
-        "fr": "PIA pour YunoHost."
+        "en": "A tool to help carrying out Privacy Impact Assessments",
+        "fr": "Un outil pour la conduite d’analyses d’impact relatives à la protection des données"
     },
     "version": "2.0",
     "url": "https://github.com/LINCnil/pia",

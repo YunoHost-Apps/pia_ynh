@@ -12,7 +12,7 @@ back_path=/opt/pia-back
 source /usr/share/yunohost/helpers
 
 # Stop pia service
-systemctl stop $app
+systemctl stop "$app"
 
 #=================================================
 # SAVE CONFIGRATION
@@ -29,7 +29,7 @@ cp -a /opt/pia-back/Gemfile /opt/pia-back/Gemfile.save
 #=================================================
 ynh_print_info "Installing PIA Back End..."
 
-ynh_app_setting_set $app final_path $final_path
+ynh_app_setting_set "$app" final_path "$final_path"
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source "$back_path" "back"
 
@@ -51,7 +51,7 @@ popd
 #=================================================
 ynh_print_info "Installing PIA Front End..."
 
-ynh_app_setting_set $app final_path $final_path
+ynh_app_setting_set "$app" final_path "$final_path"
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source "$final_path" "front"
 
@@ -80,4 +80,4 @@ ynh_setup_source "$final_path" "front"
 #fi
 
 # Start pia service
-systemctl start $app
+systemctl start "$app"

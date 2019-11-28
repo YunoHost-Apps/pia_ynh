@@ -54,20 +54,20 @@ back_path=/opt/pia-back
 test ! -e "$back_path" || ynh_die "This path already contains a folder"
 
 # Normalize the url path syntax
-path_url=$(ynh_normalize_url_path $path_url)
+path_url=$(ynh_normalize_url_path "$path_url")
 
 # Check web path availability
-ynh_webpath_available $domain $path_url
+ynh_webpath_available "$domain" "$path_url"
 # Register (book) web path
-ynh_webpath_register $app $domain $path_url
+ynh_webpath_register "$app" "$domain" "$path_url"
 
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
 
-ynh_app_setting_set $app domain $domain
-ynh_app_setting_set $app path $path_url
-ynh_app_setting_set $app is_public $is_public
+ynh_app_setting_set "$app" domain "$domain"
+ynh_app_setting_set "$app" path "$path_url"
+ynh_app_setting_set "$app" is_public "$is_public"
 
 #=================================================
 # FIND AND OPEN A PORT
@@ -119,12 +119,12 @@ ynh_print_info "Creating a PostgreSQL database..."
 ###		- Remove also the section "REMOVE THE POSTGRESQL DATABASE" in the remove script
 ###		- As well as the section "RESTORE THE POSTGRESQL DATABASE" in the restore script
 
-db_name=$(ynh_sanitize_dbid $app)
+db_name=$(ynh_sanitize_dbid "$app")
 db_pwd=$(ynh_string_random 8)
-ynh_app_setting_set $app db_name $db_name
-ynh_app_setting_set $app db_pwd $db_pwd
+ynh_app_setting_set "$app" db_name "$db_name"
+ynh_app_setting_set "$app" db_pwd "$db_pwd"
 ynh_psql_test_if_first_run
-ynh_psql_create_db $db_name $db_name $db_pwd
+ynh_psql_create_db "$db_name" "$db_name" "$db_pwd"
 
 #=================================================
 # CREATE DEDICATED USER
@@ -132,14 +132,14 @@ ynh_psql_create_db $db_name $db_name $db_pwd
 ynh_print_info "Create dedicated user..."
 
 # Create a system user
-ynh_system_user_create $app
+ynh_system_user_create "$app"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_print_info "Installing PIA Back End..."
 
-ynh_app_setting_set $app final_path $final_path
+ynh_app_setting_set "$app" final_path "$final_path"
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source "$back_path" "back"
 
@@ -162,21 +162,21 @@ ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/config/database.yml
 #=================================================
 ynh_print_info "Compile PIA Back End..."
 
-pushd /opt/pia-back/
+pushd /opt/pia-back/ || exit
 bundle install
 mv config/application.example.yml config/application.yml
 key=$(RAILS_ENV=production bin/rake secret)
 ynh_replace_string "__SECRET_KEY_HERE__" "$key" "/opt/pia-back/config/application.yml"
 #RAILS_ENV=production bin/rake db:create
 RAILS_ENV=production bin/rake db:migrate
-popd
+popd || exit
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_print_info "Installing PIA Front End..."
 
-ynh_app_setting_set $app final_path $final_path
+ynh_app_setting_set "$app" final_path "$final_path"
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source "$final_path" "front"
 
@@ -185,7 +185,7 @@ ynh_setup_source "$final_path" "front"
 #=================================================
 
 ynh_add_systemd_config
-systemctl enable $app.service
+systemctl enable "$app".service
 
 #=================================================
 # NGINX CONFIGURATION
@@ -223,18 +223,18 @@ ynh_add_nginx_config
 ### that really need such authorization.
 
 # Set permissions to app files
-chown -R $app:$app $final_path
+chown -R "$app":"$app" "$final_path"
 
 #=================================================
 # SETUP SSOWAT
 #=================================================
 
 # If app is public, add url to SSOWat conf as skipped_uris
-if [ $is_public -eq 1 ]; then
+if [ "$is_public" -eq 1 ]; then
   # unprotected_uris allows SSO credentials to be passed anyway.
   ynh_app_setting_set "$app" unprotected_uris "/"
 fi
 
 # Reload services
-systemctl start $app.service
+systemctl start "$app".service
 systemctl reload nginx

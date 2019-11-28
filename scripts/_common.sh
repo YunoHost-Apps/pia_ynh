@@ -95,7 +95,7 @@ ynh_add_systemd_config () {
 	ynh_store_file_checksum "$finalsystemdconf"
 
 	sudo chown root: "$finalsystemdconf"
-	sudo systemctl enable $app
+	sudo systemctl enable "$app"
 	sudo systemctl daemon-reload
 }
 
@@ -105,8 +105,8 @@ ynh_add_systemd_config () {
 ynh_remove_systemd_config () {
 	finalsystemdconf="/etc/systemd/system/$app.service"
 	if [ -e "$finalsystemdconf" ]; then
-		sudo systemctl stop $app
-		sudo systemctl disable $app
+		sudo systemctl stop "$app"
+		sudo systemctl disable "$app"
 		ynh_secure_remove "$finalsystemdconf"
 	fi
 }
